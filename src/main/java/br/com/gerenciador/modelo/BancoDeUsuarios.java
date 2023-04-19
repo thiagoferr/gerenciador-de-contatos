@@ -13,7 +13,30 @@ import org.apache.jasper.tagplugins.jstl.core.ForEach;
 public class BancoDeUsuarios {
 	
 	private static List<UsuarioContato> listaDeUsuarios = new ArrayList<>();
+	private static List<Cadastro> listaDeCadastrados = new ArrayList<>();
 	private static int chaveSequencial = 0;
+	
+	static {
+		Cadastro c1 = new Cadastro();
+		Cadastro c2 = new Cadastro();
+		Cadastro c3 = new Cadastro();
+		
+		c1.setEmail("user1@email.com");
+		c2.setEmail("user2@othermail.com");
+		c3.setEmail("newuser@hotmail.com");
+		
+		c1.setSenha("123456");
+		c2.setSenha("654321");
+		c3.setSenha("112233");
+		
+		BancoDeUsuarios.listaDeCadastrados.add(c1);
+		BancoDeUsuarios.listaDeCadastrados.add(c2);
+		BancoDeUsuarios.listaDeCadastrados.add(c3);
+	}
+	
+	public List<Cadastro> exibirListaDeCadastrados(){
+		return BancoDeUsuarios.listaDeCadastrados;
+	}
 	
 	public void adicionarUsuario(UsuarioContato uc) {
 		

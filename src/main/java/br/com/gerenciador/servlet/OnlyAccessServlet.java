@@ -9,11 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import br.com.gerenciador.action.EditarContato;
-import br.com.gerenciador.action.ListarContatos;
-import br.com.gerenciador.action.NovoContato;
-import br.com.gerenciador.action.RemoverContato;
+import br.com.gerenciador.action.Action;
 
 @WebServlet("/access")
 public class OnlyAccessServlet extends HttpServlet {
@@ -24,9 +22,31 @@ public class OnlyAccessServlet extends HttpServlet {
 		String paramsAction = request.getParameter("action");
 		String name = null;
 		PrintWriter out = response.getWriter();
+		String className = "br.com.gerenciador.action." + paramsAction;
+		HttpSession ss = request.getSession();
+		boolean logged = ss.getAttribute("cadAuth") == null;
+		boolean protectedAction = !(paramsAction.equals("Login") || paramsAction.equals("AutenticarUsuario"));
+		
+		if(logged && protectedAction) {
+			response.sendRedirect("access?action=Login");
+			return;
+		}
+		
+		try {
+			Class classController = Class.forName(className); //carrega a classe em mémoria com o nome especificado
+			Object classObj = classController.newInstance();
+			Action action = (Action) classObj;
+			name = action.execute(request, response);
+			System.out.println("ClassName: " + className);
+			System.out.println("Name: " + name);
+			
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ServletException
+				| IOException e) {
+			throw new ServletException();
+		}
 		
 		
-		if(paramsAction.equals("listadecontatos")) {
+		/*if(paramsAction.equals("listadecontatos")) {
 			ListarContatos action = new ListarContatos();
 			name = action.execute(request, response);
 		}
@@ -44,24 +64,27 @@ public class OnlyAccessServlet extends HttpServlet {
 			NovoContato action = new NovoContato();
 			name = action.execute(request, response);
 		}
+		else if(paramsAction.equals("formulario")) {
+			Formulario action = new Formulario();
+			name = action.execute(request, response);
+		}
 		else {
 			throw new ServletException();
-		}
+		}*/
 		
 		String[] type = name.split(":");
+		System.out.println(type[0] + "\n" + type[1]);
 		
 		if( type[0].equals("forward") ) {
-			System.out.println("type: " + type[0]);
-			System.out.println("type: " + type[1]);
-			RequestDispatcher rd = request.getRequestDispatcher(type[1]);
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + type[1]);
 			rd.forward(request, response);
 		} 
 		else if( type[0].equals("redirect") ){
-			System.out.println("type: " + type[0]);
 			response.sendRedirect(type[1]);
 		} 
 		else {
 			out.append("null");
 		}
+		
 	}
 }

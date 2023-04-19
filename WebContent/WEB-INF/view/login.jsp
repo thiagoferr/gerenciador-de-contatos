@@ -21,7 +21,7 @@
       display: flex;
       flex-direction: column;
       padding-top: 30px;
-      max-width: 400px;
+      max-width: 20vw;
       margin: 0 auto;
     }
 
@@ -29,10 +29,9 @@
       margin-bottom: 8px;
     }
 
-    input[type="text"],
-    input[type="tel"],
     input[type="email"],
-    textarea {
+    input[type="password"]
+    {
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -56,22 +55,16 @@
   </style>
 </head>
 <body>
-  <h1>Formulário de Contato</h1>
-  <form action="/gerenciador2/access?action=novocontato" method="post">
+  <h1>Login</h1>
+  <form action="/gerenciador2/access?action=AutenticarUsuario" method="post">
     
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required>
-
-    <label for="telefone">Telefone:</label>
-    <input type="tel" id="telefone" name="telefone">
-
-    <label for="email">E-mail:</label>
+    <label for="email">email</label>
     <input type="email" id="email" name="email" required>
 
-    <label for="comentario">Comentário:</label>
-    <textarea id="comentario" name="comentario" rows="5" required></textarea>
+    <label for="senha">senha</label>
+    <input type="password" id="senha" name="senha">
 
-    <input type="submit" value="Enviar">
+    <input type="submit" value="Entrar">
   </form>
 </body>
 </html>

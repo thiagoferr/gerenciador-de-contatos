@@ -23,7 +23,8 @@ List<UsuarioContato> contatos = (List<UsuarioContato>)request.getAttribute("list
 	*{
 		margin:0;
 		padding:0;
-		box-sizing: border-box;
+		box-sizing: border-box;	  
+	  	font-family: arial;
 	}
 	
 	body{
@@ -77,7 +78,6 @@ List<UsuarioContato> contatos = (List<UsuarioContato>)request.getAttribute("list
 	
 	.editar-item-contato a{
 		 text-decoration: none;
-		 border: 1px solid black;
 		 padding: 6px 12px;
 		 background-color: rgba(23, 26, 32, 0.8); 
 		 border: none; 
@@ -85,7 +85,7 @@ List<UsuarioContato> contatos = (List<UsuarioContato>)request.getAttribute("list
 		 color: #fff; 
 		 margin-left: 10px;
 		 font-family: SFProText-Regular, Helvetica, Arial, sans-serif; 
-		 font-size: 15px; 
+		 font-size: 12px; 
 		 height: 30px; 
 		 line-height: 20px; 
 		 text-align: center;
@@ -132,14 +132,22 @@ List<UsuarioContato> contatos = (List<UsuarioContato>)request.getAttribute("list
  	.header h1{
  		margin-bottom: 10px;
  	}
+ 	
+ 	#logout{
+ 		position: absolute;
+ 		top: 20px;
+ 		right: 100px;
+ 	}
  		
 </style>
 </head>
 <body>
+	<a id="logout" href="/gerenciador2/access?action=Logout">Logout</a>
 	<div class="main">
 		<div class="header">
 			<h1> Lista de Contatos</h1>
-			<a href="/gerenciador2/formulario.html">
+		<!--  	<a href="/gerenciador2/access?action=Formulario">-->
+		<a href="access?action=AdicionarContatoForms">
 				Adicionar
 			</a>
 		</div>
@@ -171,15 +179,14 @@ List<UsuarioContato> contatos = (List<UsuarioContato>)request.getAttribute("list
 			<c:forEach items="${lista}" var="listaUsuario">
 			<li>
 			<div class="item-contato"> 
-		
-			${listaUsuario.nome} - 
-			<fmt:formatDate value="${listaUsuario.dataComentario}" pattern="dd/MM/yyyy HH:mm:ss"/>
+				${listaUsuario.nome} - 
+				<fmt:formatDate value="${listaUsuario.dataComentario}" pattern="dd/MM/yyyy HH:mm:ss"/>
 			</div>
 			<div class="editar-item-contato"> 
-				<a href="/gerenciador2/access?action=editarcontato&id=${listaUsuario.id}">
+				<a href="/gerenciador2/access?action=EditarContato&id=${listaUsuario.id}">
 					Editar
 				</a>
-				<a href="/gerenciador2/access?action=removercontato&id=${listaUsuario.id}">
+				<a href="/gerenciador2/access?action=RemoverContato&id=${listaUsuario.id}">
 					Remover
 				</a>
 			</div>

@@ -70,11 +70,18 @@
       background-color: #3e8e41;
     }
     
+ 	#logout{
+ 		position: absolute;
+ 		top: 20px;
+ 		right: 100px;
+ 	}
+ 	
   </style>
 </head>
 <body>
+<a id="logout" href="/gerenciador2/access?action=Logout">Logout</a>
   <h1>Formulário de Contato</h1>
-  <form action="/gerenciador2/access?action=novocontato" method="post">
+  <form action="/gerenciador2/access?action=NovoContato" method="post">
   
     <label for="id"></label>
     <input type="hidden" id="id" name="id" value="${contatoId}" >

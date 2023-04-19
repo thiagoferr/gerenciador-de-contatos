@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.gerenciador.modelo.BancoDeUsuarios;
 import br.com.gerenciador.modelo.UsuarioContato;
 
-public class NovoContato {
+public class NovoContato implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		   System.out.println("access/novocontato");
 		  
@@ -31,7 +31,7 @@ public class NovoContato {
 	    	   if(uc != null) {
 	    		   System.out.println("Contato editado com sucesso!");	
 	    		   //response.sendRedirect("access?action=listadecontatos");   
-	    		   return "redirect:access?action=listadecontatos";
+	    		   return "redirect:access?action=ListarContatos";
 	    	   } else {
 	    		   System.out.println("Não foi possível editar este contato");
 	    	   }
@@ -39,7 +39,7 @@ public class NovoContato {
 		       bancoDeUsuario.adicionarUsuario(usuarioContato);
 
 		       //response.sendRedirect("access?action=listadecontatos");   
-		       return "redirect:access?action=listadecontatos";
+		       return "redirect:access?action=ListarContatos";
 		   }
 	       return null;
 	}

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.gerenciador.modelo.BancoDeUsuarios;
 import br.com.gerenciador.modelo.UsuarioContato;
 
-public class RemoverContato {
+public class RemoverContato implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			System.out.println("access/removercontato");
 			String id = request.getParameter("id");
@@ -19,6 +19,6 @@ public class RemoverContato {
 
 			bancoDeUsuarios.removerUsuario(Integer.parseInt(id));
 			//response.sendRedirect("access?action=listadecontatos");   
-			return "redirect:access?action=listadecontatos";
+			return "redirect:access?action=ListarContatos";
 	}
 }

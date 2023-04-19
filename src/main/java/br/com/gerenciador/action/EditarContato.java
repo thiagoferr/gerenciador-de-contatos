@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.gerenciador.modelo.BancoDeUsuarios;
 import br.com.gerenciador.modelo.UsuarioContato;
 
-public class EditarContato {
+public class EditarContato implements Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("access/editarcontato");
 		String id = request.getParameter("id");
